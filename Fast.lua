@@ -1311,9 +1311,6 @@ Redis:incr(Fast.."Num:Add:Memp"..msg.chat_id..":"..msg.sender.user_id)
 if AddMembrs == "kick" and not msg.ControllerBot then
 LuaTele.setChatMemberStatus(msg.chat_id,v,'banned',0)
 end
-end
-end
-end 
 
 if msg.content.luatele == "messageContact" and not msg.Special then  -- الجهات
 local Contact_Group = Redis:get(Fast.."Lock:Contact"..msg_chat_id)
