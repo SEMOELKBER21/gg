@@ -1298,33 +1298,6 @@ end
 print('This is message Pin')
 end 
 
-
-if msg.content.luatele == "messageChatAddMembers" then -- اضافه اشخاص
-print('This is Add Membeers ')
-Redis:incr(Fast.."Num:Add:Memp"..msg_chat_id..":"..msg.sender.user_id) 
-local AddMembrs = Redis:get(Fast.."Lock:AddMempar"..msg_chat_id) 
-local Lock_Bots = Redis:get(Fast.."Lock:Bot:kick"..msg_chat_id)
-for k,v in pairs(msg.content.member_user_ids) do
-local Info_User = LuaTele.getUser(v) 
-print(v)
-if v == tonumber(Fast) then
-local N = (Redis:get(Fast.."Name:Bot") or "دٰآيموند")
-photo = LuaTele.getUserProfilePhotos(Fast)
-local TextBot = '*⋆ مرحبا بكم في بوت '..N..'\n⋆ وظيفته حمايه المجموعة من السبام والتفليش الخ..\n⋆ لتفعيل البوت اضفه مشرف واكتب تفعيل\n*'
-keyboard = {} 
-keyboard.inline_keyboard = {
-{
-{text = ' تفعيل ', callback_data = msg.sender.user_id..'/onlinebott'..msg_chat_id},
-},
-{
-{text = 'قناه السورس', url = 't.me/A2NAA'},
-}
-}
-local rep = msg.id/2097152/0.5
-https.request("https://api.telegram.org/bot"..Token.."/sendphoto?chat_id="..msg.chat_id.."&reply_to_message_id="..rep.."&photo="..photo.photos[1].sizes[#photo.photos[1].sizes].photo.remote.id.."&caption="..URL.escape(TextBot).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
-end
-
-
 Redis:set(Fast.."Who:Added:Me"..msg_chat_id..":"..v,msg.sender.user_id)
 if Info_User.type.luatele == "userTypeBot" then
 if Lock_Bots == "del" and not msg.ControllerBot then
